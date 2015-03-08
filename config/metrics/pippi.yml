@@ -1,0 +1,3 @@
+---
+checkset: basic
+output: "tmp/pippi/output.log"

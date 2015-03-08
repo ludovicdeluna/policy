@@ -1,0 +1,3 @@
+--asset LICENSE
+--exclude lib/policies/version.rb
+--out doc/api
