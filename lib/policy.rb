@@ -11,6 +11,7 @@ module Policy
   require_relative "policy/validations"
   require_relative "policy/violation_error"
   require_relative "policy/interface"
+  require_relative "policy/follower"
 
   # Builds a base class for the policy object with some attributes
   #
