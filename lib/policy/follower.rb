@@ -7,6 +7,7 @@ module Policy
 
     require_relative "follower/names"
     require_relative "follower/followed_policy"
+    require_relative "follower/followed_policies"
 
   end # module Follower
 
