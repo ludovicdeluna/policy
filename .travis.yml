@@ -1,7 +1,7 @@
 ---
 language: ruby
 bundler_args: --without=extras
-script: rspec spec
+script: rake check:coverage
 rvm:
   # ### For commented versions changes are needed in the 'hexx-suit' ###
   # - '1.9.2'

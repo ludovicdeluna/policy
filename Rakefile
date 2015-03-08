@@ -14,4 +14,4 @@ require "hexx-suit"
 Hexx::Suit.install_tasks
 
 # Sets the Hexx::Suit :test task to default
-task default: "check:coverage"
+task default: :test
