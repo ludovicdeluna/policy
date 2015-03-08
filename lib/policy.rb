@@ -9,5 +9,6 @@ module Policy
 
   require_relative "policy/version"
   require_relative "policy/validations"
+  require_relative "policy/violation_error"
 
 end # module Policy
