@@ -19,5 +19,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.required_ruby_version = "~> 2.1" # The constraint for the 'hexx-suit'
 
+  s.add_runtime_dependency "activemodel", ">= 3.1", "< 5.0"
+
   s.add_development_dependency "hexx-suit", "~> 0.0"
 end
