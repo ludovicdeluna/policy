@@ -170,7 +170,13 @@ The policies are verified one-by-one in given order until the first break.
 
 # Compatibility
 
-Tested under MRI rubies >= 2.1. Rubies under 2.1 aren't supported yet.
+Tested under rubies, compatible with MRI 2.0+:
+
+* MRI rubies 2.0+
+* Rubinius 2+ (2.0+ mode)
+* JRuby 1.7+ (2.0+ mode)
+
+Rubies with API 1.9 are not supported.
 
 Uses [RSpec] 3.0+ for testing and [hexx-suit] for dev/test tools collection.
 

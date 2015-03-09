@@ -3,18 +3,16 @@ language: ruby
 bundler_args: --without=extras
 script: rake check:coverage
 rvm:
-  # ### For commented versions changes are needed in the 'hexx-suit' ###
-  # - '1.9.2'
-  # - '1.9.3'
-  # - '2.0'
+  - '2.0'
   - '2.1'
   - '2.2'
-  # - jruby
-  # - rbx-2
-  # ### ALLOWED FAILURES ###
-  # # see how compatible we are with dev versions, but do not fail the build
+  - rbx-2 --2.0
+  - jruby-20mode
+  ### ALLOWED FAILURES ###
+  # see how compatible we are with dev versions, but do not fail the build
   - ruby-head
-  # - jruby-head
 allow_failures:
   - rvm: ruby-head
-  # - rvm: jruby-head
+env:
+  - "activemodel=3.1"
+  - "activemodel=master"

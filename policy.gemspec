@@ -8,19 +8,16 @@ Gem::Specification.new do |s|
   s.email       = "andrew.kozin@gmail.com"
   s.homepage    = "https://github.com/nepalez/hexx"
   s.summary     = "Policy Objects for Ruby."
-  s.description = "Tiny library to implement Policy Object pattern."
+  s.description = "A tiny library implementing the Policy Object pattern."
   s.license     = "MIT"
 
-  s.require_paths    = ["lib"]
   s.files            = `git ls-files`.split($INPUT_RECORD_SEPARATOR)
   s.test_files       = Dir["spec/**/*.rb"]
   s.extra_rdoc_files = Dir["README.md", "LICENSE", "config/metrics/STYLEGUIDE"]
-
-  s.platform    = Gem::Platform::RUBY
-  s.required_ruby_version = "~> 2.1" # The constraint for the 'hexx-suit'
+  s.require_paths    = ["lib"]
 
   s.add_runtime_dependency "activemodel", ">= 3.1", "< 5.0"
   s.add_runtime_dependency "adamantium", "~> 0.2"
 
-  s.add_development_dependency "hexx-suit", "~> 0.0"
+  s.add_development_dependency "hexx-suit", "~> 0.2", "> 0.2.1"
 end
