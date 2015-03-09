@@ -86,13 +86,13 @@ Policy can be declared and tested in isolation both from each other and from cla
 
 ## Following a Policy
 
-Include the `Policy::Follower` module to the class and apply policies to corresponding attributes.
+Include the `Policy::Follower` module to the class and apply policies to corresponding attributes with `follow_policy` **class** method.
 
 ```ruby
 class Transfer < Struct.new(:withdrawal, :enrollment)
   include Policy::Follower # also includes ActiveModel::Validations
 
-  apply_policy Policies::Financial::Consistency, to: %i(withdrawal enrollment)
+  follow_policy Policies::Financial::Consistency, :withdrawal, :enrollment
 end
 ```
 
@@ -101,26 +101,26 @@ The order of attributes (after the `to:` option) should correspond to the policy
 You can swap attributes...
 
 ```ruby
-apply_policy Policies::Financial::Consistency, to: %i(enrollment withdrawal)
+follow_policy Policies::Financial::Consistency, :enrollment, :withdrawal
 ```
 
 ...or use the same attribute several times:
 
 ```ruby
-apply_policy Policies::Financial::Consistency, to: %i(withdrawal withdrawal)
+follow_policy Policies::Financial::Consistency, :withdrawal, :withdrawal
 ```
 
 Applied policies can be grouped by namespaces:
 
 ```ruby
 use_policies Policies::Financial do
-  apply_policy :Consistency, to: %i(withdrawal, enrollment)
+  follow_policy :Consistency, :withdrawal, :enrollment
 end
 ```
 
 ## Policies Verification
 
-To verify object use `#meet_policies?` or `#meet_policies!` instance methods.
+To verify object use `#follow_policies?` or `#follow_policies!` **instance** methods.
 
 ```ruby
 Transaction = Struct.new(:account, :sum)
@@ -129,10 +129,10 @@ enrollment  = Transaction.new(account_2, 1000)
 
 transfer = Transfer.new withdrawal, enrollment
 
-transfer.meet_policies?
+transfer.follow_policies?
 # => false
 
-transfer.meet_policies!
+transfer.follow_policies!
 # => raises <Policy::ViolationError>
 ```
 
@@ -147,23 +147,23 @@ class Transfer < Struct.new(:withdrawal, :enrollment)
   include Policy::Follower
 
   use_policies Policies::Financial do
-    apply_policy :Consistency, to: %i(withdrawal enrollment), as: :consistency
+    follow_policy :Consistency, to: %i(withdrawal enrollment), as: :consistency
   end
 end
 ```
 
-Check policies by names:
+Check policies by names (you can use a singular form `follow_policy`):
 
 ```ruby
 # Checks only consistency and skips all other policies
-transaction.meet_policies? :consistency
-transaction.meet_policies! :consistency
+transaction.follow_policy? :consistency
+transaction.follow_policy! :consistency
 ```
 
 The set of policies can be checked at once:
 
 ```ruby
-transaction.meet_policies? :consistency, ...
+transaction.follow_policies? :consistency, ...
 ```
 
 The policies are verified one-by-one in given order until the first break.
