@@ -45,7 +45,7 @@ module Policy
       #
       # @example For Policies::Finances::TransferConsistency
       #   use_policies Policies::Finances do
-      #     apply_policy :TransferConstistency, to: %i(debet credit)
+      #     apply_policy :TransferConstistency, :debet, :credit
       #   end
       #
       # @param [Module] namespace

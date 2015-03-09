@@ -47,7 +47,7 @@ describe Policy::Follower do
         expect(test_class.followed_policies).to receive(:add).with(policy)
       end
 
-    end
+    end # context
 
     context "as: name" do
 
@@ -200,7 +200,7 @@ describe Policy::Follower do
       expect(subject.method(:follow_policy!).arity).to eq 1
     end
 
-  end # describe #follow_policy?
+  end # describe #follow_policy!
 
   describe "#follow_policy?" do
 
@@ -215,6 +215,6 @@ describe Policy::Follower do
       expect(subject.method(:follow_policy?).arity).to eq 1
     end
 
-  end
+  end # describe #follow_policy?
 
 end # describe Policy::Follower

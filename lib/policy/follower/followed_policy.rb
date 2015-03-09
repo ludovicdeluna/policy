@@ -40,7 +40,7 @@ module Policy
       def initialize(namespace, policy, name, *attributes)
         @policy     = find_policy(namespace, policy)
         @name       = (name || SecureRandom.uuid).to_sym
-        @attributes = attributes
+        @attributes = check_attributes attributes
       end
 
       # @!attribute [r] name
@@ -83,6 +83,19 @@ module Policy
 
       def attributes_of(follower)
         attributes.map(&follower.method(:send))
+      end
+
+      def check_attributes(attributes)
+        number = policy.members.count - 1
+        return attributes if attributes.count.equal?(number)
+        fail wrong_number(number, attributes)
+      end
+
+      def wrong_number(number, attributes)
+        ArgumentError.new [
+          "#{ policy } requires #{ number } attribute(s).",
+          "#{ attributes } cannot be assigned."
+        ].join(" ")
       end
 
     end # class FollowedPolicy

@@ -96,7 +96,7 @@ class Transfer < Struct.new(:withdrawal, :enrollment)
 end
 ```
 
-The order of attributes (after the `to:` option) should correspond to the policy definition.
+The order of attributes should correspond to the policy definition.
 
 You can swap attributes...
 
@@ -147,7 +147,7 @@ class Transfer < Struct.new(:withdrawal, :enrollment)
   include Policy::Follower
 
   use_policies Policies::Financial do
-    follow_policy :Consistency, to: %i(withdrawal enrollment), as: :consistency
+    follow_policy :Consistency, :withdrawal, :enrollment, as: :consistency
   end
 end
 ```
