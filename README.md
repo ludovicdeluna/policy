@@ -17,13 +17,13 @@ Policy
 
 A tiny library to implement a **Policy Object pattern**.
 
-The gem is inspired by
+The gem was inspired by:
 * the CodeClimate's blog post "[7 ways to decompose fat ActiveRecord module]" 
-* the part "How to Model Less Obvious Kinds of Concept" from the "Domain-Driven Design" by Eric Evans.
+* the part "How to Model Less Obvious Kinds of Concept" from the "[Domain-Driven Design]" by Eric Evans.
 
-A **Policy Object** encapsulates a complex business rule of the application domain model in isolation from objects (such as entities or services) following them.
+A **Policy Object** encapsulates a business rule in isolation from objects (such as entities or services) following it.
 
-Such a separation provides a number of benefits:
+This separation provides a number of benefits:
 
 * It makes business rules **explicit** instead of spreading and hiding them inside application objects.
 * It makes the rules **reusable** in various context (think of the *transaction consistency* both in bank transfers and cach machine withdrawals).
@@ -175,7 +175,7 @@ class Transfer < Struct.new(:withdrawal, :enrollment)
 end
 ```
 
-Check policies by names (you can use a singular form `follow_policy`):
+Check policies by names (you can also use singular forms `follow_policy?` and `follow_policy!`):
 
 ```ruby
 # Checks only consistency and skips all other policies
@@ -201,7 +201,13 @@ Tested under rubies, compatible with MRI 2.0+:
 
 Rubies with API 1.9 are not supported.
 
+Uses [ActiveModel::Validations] - tested for 3.1+
+
 Uses [RSpec] 3.0+ for testing and [hexx-suit] for dev/test tools collection.
+
+[RSpec]: http://rspec.info/
+[hexx-suit]: https://github.com/nepalez/hexx-suit/
+[ActiveModel::Validations]: http://apidock.com/rails/v3.1.0/ActiveModel/Validations
 
 # Contributing
 
