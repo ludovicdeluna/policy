@@ -2,7 +2,7 @@
 
 describe Policy::Follower do
 
-  before { Test = Class.new.include described_class }
+  before { Test = Class.new.__send__(:include, described_class) }
   after  { Object.send :remove_const, :Test         }
 
   let(:test_class)  { Test }
@@ -125,7 +125,7 @@ describe Policy::Follower do
 
       it "populates messages with errors" do
         expect { subject.follow_policies! rescue nil }
-          .to change { subject.send(:errors).messages }
+          .to change { subject.__send__( :errors).messages }
           .to(base: messages)
       end
 

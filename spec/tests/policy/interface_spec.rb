@@ -2,7 +2,7 @@
 
 describe Policy::Interface do
 
-  before { Test = Class.new.include described_class }
+  before { Test = Class.new.send :include, described_class }
   after  { Object.send :remove_const, :Test         }
 
   let(:test_class)  { Test }

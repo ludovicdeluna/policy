@@ -127,7 +127,7 @@ module Policy
     # @!parse extend  Policy::Follower::ClassMethods
     # @!parse include ActiveModel::Validations
     def self.included(klass)
-      klass.extend(ClassMethods).include(Validations)
+      klass.extend(ClassMethods).__send__(:include, Validations)
     end
 
     def followed_policies

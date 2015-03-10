@@ -10,7 +10,7 @@ module Policy
   # @todo Implement it later from scratch without excessive features
   #
   # @example
-  #   MyClass.include Policy::Validations
+  #   MyClass.include, Policy::Validations
   #
   # @private
   module Validations
@@ -20,7 +20,7 @@ module Policy
 
     # @private
     def self.included(klass)
-      klass.include(IMPLEMENTATION)
+      klass.__send__(:include, IMPLEMENTATION)
     end
 
   end # module Validations

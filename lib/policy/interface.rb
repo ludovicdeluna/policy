@@ -7,7 +7,7 @@ module Policy
 
     # @private
     def self.included(klass)
-      klass.extend(ClassMethods).include(Validations)
+      klass.extend(ClassMethods).__send__(:include, Validations)
     end
 
     # Container for the policy class methods

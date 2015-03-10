@@ -24,7 +24,7 @@ module Policy
   #
   # @return [Struct]
   def self.new(*attributes)
-    Struct.new(*attributes).include(Interface)
+    Struct.new(*attributes).__send__(:include, Interface)
   end
 
 end # module Policy
