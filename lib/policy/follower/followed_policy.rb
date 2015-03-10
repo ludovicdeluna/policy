@@ -86,7 +86,7 @@ module Policy
       end
 
       def check_attributes(attributes)
-        number = policy.members.count - 1
+        number = policy.members.count
         return attributes if attributes.count.equal?(number)
         fail wrong_number(number, attributes)
       end

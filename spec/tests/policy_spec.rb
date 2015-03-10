@@ -18,14 +18,6 @@ describe Policy do
       end
     end
 
-    it "adds the 'follower' attribute" do
-      methods = subject.instance_methods
-
-      %i(follower follower=).each do |method|
-        expect(methods).to include method
-      end
-    end
-
     it "includes Policy::Interface" do
       expect(subject).to include(Policy::Interface)
     end

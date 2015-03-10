@@ -24,7 +24,7 @@ module Policy
   #
   # @return [Struct]
   def self.new(*attributes)
-    Struct.new(:follower, *attributes).include(Interface)
+    Struct.new(*attributes).include(Interface)
   end
 
 end # module Policy
