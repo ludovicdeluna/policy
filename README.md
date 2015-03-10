@@ -15,16 +15,23 @@ Policy
 [travis]: https://travis-ci.org/nepalez/policy
 [inch]: https://inch-ci.org/github/nepalez/policy
 
-The tiny library to implement a [Policy Object pattern].
+A tiny library to implement a **Policy Object pattern**.
 
-The module provides:
+The gem is inspired by
+* the CodeClimate's blog post "[7 ways to decompose fat ActiveRecord module]" 
+* the part "How to Model Less Obvious Kinds of Concept" from the "Domain-Driven Design" by Eric Evans.
 
-* Policy class builder (`Policy`).
-* Policy follower module (`Policy::Follower`).
+A **Policy Object** encapsulates a complex business rule of the application domain model in isolation from objects (such as entities or services) following them.
 
-[Policy Object pattern]: http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
-[Struct]: http://ruby-doc.org//core-2.2.0/Struct.html
-[ActiveModel::Validations]: http://apidock.com/rails/ActiveModel/Validations
+Such a separation provides a number of benefits:
+
+* It makes business rules **explicit** instead of spreading and hiding them inside application objects.
+* It makes the rules **reusable** in various context (think of the *transaction consistency* both in bank transfers and cach machine withdrawals).
+* It allows definition of rules for **numerous attributes** that should correspond to each other in some way.
+* It makes complex rules **testable** in isolation from even more complex objects.
+
+[7 ways to decompose fat ActiveRecord module]: http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/
+[Domain-Driven Design]: http://www.amazon.com/dp/B00794TAUG/
 
 # Installation
 
@@ -48,23 +55,36 @@ Or install it yourself as:
 
 # Usage
 
-Suppose you have models with attributes:
-* `Account` with `:limit` and `:sum`;
-* `Transaction` with `:account` and `:sum`;
-* `Transfer` with `:witdrawal` and `:enrollment`.
+## The Model for Illustration
 
-And you need to apply the rule (policy):
+Suppose an over-simplified model of bank account transactions and account-to-account transfers.
 
-* Withdrawal from one account should be equal to enrollment to another.
+```ruby
+# The bank account with a withdrawal limit being set
+class Account < Struct.new(:limit); end
+
+# The account transaction (either enrollment or witdrawal)
+class Transaction < Struct.new(:account, :sum); end
+
+# The account-to account transfer, connecting two separate transactions
+# (maybe this isn't an optimal model, but helpful for the subject)
+class Transfer < Struct.new(:withdrawal, :enrollment); end
+```
+
+What we need is to apply the simple policy:
+
+**Withdrawal from one account should be equal to enrollment to another.**
 
 Let's do it with Policy Objects! 
 
 ## Policy Declaration
 
-Define policies with a list of necessary attributes (like using [Struct]), and use [ActiveModel::Validations] methods to describe the policy rules:
+Define policies with a list of necessary attributes like using [Struct].
+
+Tnen use [ActiveModel::Validations] methods to describe its rules:
 
 ```ruby
-# An arbitrary namespace for policies
+# An arbitrary namespace for financial policies
 module Policies::Financial
 
   # Withdrawal from one account should be equal to enrollment to another
@@ -82,7 +102,10 @@ module Policies::Financial
 end
 ```
 
-Policy can be declared and tested in isolation both from each other and from classes that follows them. They can be reused in various contexts.
+Note a policy knows nothing about the complex nature of its attributes until their quack like transactions with `#sum` method defined.
+
+[Struct]: http://ruby-doc.org//core-2.2.0/Struct.html
+[ActiveModel::Validations]: http://apidock.com/rails/ActiveModel/Validations
 
 ## Following a Policy
 
@@ -98,19 +121,19 @@ end
 
 The order of attributes should correspond to the policy definition.
 
-You can swap attributes...
+You can swap attributes (this is ok for our example)...
 
 ```ruby
 follow_policy Policies::Financial::Consistency, :enrollment, :withdrawal
 ```
 
-...or use the same attribute several times:
+...or use the same attribute several times when necessary (not in our example, though):
 
 ```ruby
 follow_policy Policies::Financial::Consistency, :withdrawal, :withdrawal
 ```
 
-Applied policies can be grouped by namespaces:
+Applied policies can be grouped by namespaces (useful when the object should follow many policies):
 
 ```ruby
 use_policies Policies::Financial do
@@ -136,11 +159,11 @@ transfer.follow_policies!
 # => raises <Policy::ViolationError>
 ```
 
-The policies are verified one-by-one until the first break in the same order they were applied.
+The policies are verified one-by-one until the first break - in just the same order they were declared.
 
 ### Asyncronous Verification
 
-Define the unique names for policies using `as:` option:
+Define names for policies using `as:` option. The names should be unique in the class' scope:
 
 ```ruby
 class Transfer < Struct.new(:withdrawal, :enrollment)
@@ -166,7 +189,7 @@ The set of policies can be checked at once:
 transaction.follow_policies? :consistency, ...
 ```
 
-The policies are verified one-by-one in given order until the first break.
+Now the policies are verified one-by-one in **given order** (it may differ from the order of policies declaration) until the first break.
 
 # Compatibility
 

@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = Dir["README.md", "LICENSE", "config/metrics/STYLEGUIDE"]
   s.require_paths    = ["lib"]
 
-  s.add_runtime_dependency "activemodel", ">= 3.1", "< 5.0"
+  s.add_runtime_dependency "activemodel", ">= 3.1"
   s.add_runtime_dependency "adamantium", "~> 0.2"
 
   s.add_development_dependency "hexx-suit", "~> 0.2", "> 0.2.1"

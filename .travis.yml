@@ -2,17 +2,17 @@
 language: ruby
 bundler_args: --without=extras
 script: rake check:coverage
-rvm:
-  - '2.0'
-  - '2.1'
-  - '2.2'
-  - rbx-2 --2.0
-  - jruby-20mode
-  ### ALLOWED FAILURES ###
-  # see how compatible we are with dev versions, but do not fail the build
-  - ruby-head
-allow_failures:
-  - rvm: ruby-head
-env:
-  - "activemodel=3.1"
-  - "activemodel=master"
+matrix:
+  include:
+    - rvm: '2.0'
+      env: 'activemodel=3.1'
+    - rvm: 'ruby-head'
+      env: 'activemodel=master'
+    - rvm: 'rbx-2 --2.0'
+      env: 'activemodel=3.1'
+    - rvm: 'rbx-head --2.0'
+      env: 'activemodel=master'
+    - rvm: 'jruby-20mode'
+      env: 'activemodel=3.1'
+    - rmv: 'jruby-head-20mode'
+      env: 'activemodel=master'
