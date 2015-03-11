@@ -115,7 +115,7 @@ describe Policy::Follower do
 
     context "when a ViolationError is raised" do
 
-      let(:error)    { Policy::ViolationError.allocate } # not frozen
+      let(:error)    { Policy::ViolationError.allocate }
       let(:messages) { %w(foo bar baz) }
 
       before do
@@ -165,7 +165,7 @@ describe Policy::Follower do
 
     context "wheh #folow_policies! raises ViolationError" do
 
-      let(:error) { Policy::ViolationError.new "invalid" }
+      let(:error) { Policy::ViolationError.allocate }
       before { allow(subject).to receive(:follow_policies!) { fail error } }
 
       it "returns false" do
@@ -176,7 +176,7 @@ describe Policy::Follower do
 
     context "wheh #follow_policies! raises RuntimeError" do
 
-      let(:error) { StandardError.new "invalid" }
+      let(:error) { StandardError.allocate }
       before { allow(subject).to receive(:follow_policies!) { fail error } }
 
       it "fails" do
