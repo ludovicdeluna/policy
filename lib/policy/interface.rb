@@ -20,8 +20,8 @@ module Policy
       # @raise (see Policy::Interface#apply)
       #
       # @return [undefined]
-      def apply(attributes)
-        new(attributes).apply
+      def apply(*attributes)
+        new(*attributes).apply
       end
 
     end
@@ -40,7 +40,7 @@ module Policy
     #
     # @return [undefined]
     def apply
-      fail ViolationError.new self unless valid?
+      fail ViolationError.new(self) unless valid?
     end
 
   end # class Interface
