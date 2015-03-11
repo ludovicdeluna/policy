@@ -24,4 +24,12 @@ describe Policy do
 
   end # describe .new
 
+  describe ".name" do
+
+    subject { described_class.name }
+
+    it { is_expected.to eq "Policy" }
+
+  end
+
 end # describe Policy
