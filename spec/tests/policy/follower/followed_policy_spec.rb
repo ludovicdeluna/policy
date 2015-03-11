@@ -35,12 +35,6 @@ describe Policy::Follower::FollowedPolicy do
     it_behaves_like "refusing wrong number of attributes", :foo
     it_behaves_like "refusing wrong number of attributes", :foo, :bar, :baz
 
-    it "creates the immutable object" do
-      subject = described_class.new nil, policy_class, :policy, :foo, :bar
-
-      expect(subject).to be_frozen
-    end
-
   end # describe .new
 
   describe "#name" do

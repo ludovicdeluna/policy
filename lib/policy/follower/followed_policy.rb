@@ -20,7 +20,6 @@ module Policy
     #
     # @api private
     class FollowedPolicy
-      include Adamantium
 
       # @!scope class
       # @!method new(namespace, policy, name, *attributes)
