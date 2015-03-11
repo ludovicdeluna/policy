@@ -72,6 +72,10 @@ Style/SpecialGlobalVars:
     - '**/Gemfile'
     - '**/*.gemspec'
 
+Style/StructInheritance:
+  Exclude:
+    - '**/*_spec.rb'
+
 Style/StringLiterals:
   EnforcedStyle: double_quotes
 

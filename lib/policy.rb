@@ -28,11 +28,10 @@ module Policy
     def new(*attributes)
       Struct.new(*attributes) do
         include Interface
-        
+
         def self.name
           "Policy"
         end
-
       end
     end
 

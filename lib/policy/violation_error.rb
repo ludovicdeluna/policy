@@ -12,7 +12,7 @@ module Policy
     # @return [Policy::Follower]
     attr_reader :policy
 
-    # @!attribute messages
+    # @!attribute [r] messages
     # The list of messages from the broken policy
     #
     # @return [Array<String>]
