@@ -61,10 +61,6 @@ describe Policy::ViolationError do
         .to eq "#<Policy::ViolationError: #{ subject.message }>"
     end
 
-    it "is immutable" do
-      expect(subject.inspect).to be_frozen
-    end
-
   end # describe #inspect
 
   describe "#message" do
@@ -72,10 +68,6 @@ describe Policy::ViolationError do
     it "returns a proper text" do
       expect(subject.message)
         .to eq "#{ policy.inspect } violated: #{ subject.messages }"
-    end
-
-    it "is frozen" do
-      expect(subject.message).to be_frozen
     end
 
   end # describe #message

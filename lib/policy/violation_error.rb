@@ -12,6 +12,12 @@ module Policy
     # @return [Policy::Follower]
     attr_reader :policy
 
+    # @!attribute messages
+    # The list of messages from the broken policy
+    #
+    # @return [Array<String>]
+    attr_reader :messages
+
     # @!scope class
     # @!method new(policy)
     # Constructs an exception
@@ -21,7 +27,8 @@ module Policy
     #
     # @return [Policy::ViolationError]
     def initialize(policy)
-      @policy = policy.dup
+      @policy   = policy.dup
+      @messages = @policy.messages
     end
 
     # The human-readable description for the exception
@@ -38,14 +45,7 @@ module Policy
       "#{ policy } violated: #{ messages }"
     end
 
-    # The list of messages from the broken policy
-    #
-    # @return [Array<String>]
-    def messages
-      policy.messages
-    end
-
-    memoize :message, :messages, :inspect
+    memoize :policy, :messages
 
   end # module Follower
 
