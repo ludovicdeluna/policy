@@ -13,5 +13,5 @@ Bundler::GemHelper.install_tasks
 require "hexx-suit"
 Hexx::Suit.install_tasks
 
-# Sets the Hexx::Suit :test task to default
+# Sets the Hexx::RSpec :test task to default
 task default: :test

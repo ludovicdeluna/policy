@@ -2,11 +2,11 @@ $:.push File.expand_path("../lib", __FILE__)
 require "policy/version"
 
 Gem::Specification.new do |s|
-  s.name        = "hexx-validators"
+  s.name        = "policy"
   s.version     = Policy::VERSION.dup
   s.author      = "Andrew Kozin"
   s.email       = "andrew.kozin@gmail.com"
-  s.homepage    = "https://github.com/nepalez/hexx"
+  s.homepage    = "https://github.com/nepalez/policy"
   s.summary     = "Policy Objects for Ruby."
   s.description = "A tiny library implementing the Policy Object pattern."
   s.license     = "MIT"
@@ -19,5 +19,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "activemodel", ">= 3.1"
   s.add_runtime_dependency "adamantium", "~> 0.2"
 
-  s.add_development_dependency "hexx-suit", "~> 0.2", "> 0.2.1"
+  s.add_development_dependency "hexx-rspec", "~> 0.1"
 end

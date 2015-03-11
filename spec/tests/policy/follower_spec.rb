@@ -125,7 +125,7 @@ describe Policy::Follower do
 
       it "populates messages with errors" do
         expect { subject.follow_policies! rescue nil }
-          .to change { subject.__send__( :errors).messages }
+          .to change { subject.__send__(:errors).messages }
           .to(base: messages)
       end
 

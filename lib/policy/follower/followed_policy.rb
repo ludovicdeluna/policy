@@ -23,7 +23,7 @@ module Policy
       include Adamantium
 
       # @!scope class
-      # @!method new(policy, name, *attributes)
+      # @!method new(namespace, policy, name, *attributes)
       # Creates the immutable policy to be followed by given object
       #
       # @param [Module] namespace

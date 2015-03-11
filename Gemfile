@@ -2,4 +2,6 @@ source "https://rubygems.org"
 
 gemspec
 
-gem "mutant-rspec"
+group :development, :test do
+  gem "hexx-suit", "~> 1.2", require: false
+end
