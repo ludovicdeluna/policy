@@ -38,19 +38,19 @@ This separation provides a number of benefits:
 Add this line to your application's Gemfile:
 
 ```ruby
-    gem "policy"
+gem "policy"
 ```
 
 And then execute:
 
 ```
-    $ bundle
+$ bundle
 ```
 
 Or install it yourself as:
 
 ```
-    $ gem install policy
+$ gem install policy
 ```
 
 # Usage
