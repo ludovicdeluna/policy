@@ -1,7 +1,7 @@
 ---
 language: ruby
 bundler_args: --without=extras
-script: rake test:coverage
+script: bundle exec rspec spec
 matrix:
   include:
     - rvm: '2.0'
