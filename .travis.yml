@@ -1,18 +1,10 @@
 ---
 language: ruby
 bundler_args: --without=extras
-script: bundle exec rspec spec
-matrix:
-  include:
-    - rvm: '2.0'
-      env: 'activemodel=3.1'
-    - rvm: 'ruby-head'
-      env: 'activemodel=master'
-    - rvm: 'rbx-2 --2.0'
-      env: 'activemodel=3.1'
-    - rvm: 'rbx-2 --2.0'
-      env: 'activemodel=master'
-    - rvm: 'jruby-20mode'
-      env: 'activemodel=3.1'
-    - rvm: 'jruby-head-20mode'
-      env: 'activemodel=master'
+script: rake test:coverage
+rvm:
+  - '2.0'
+  - 'ruby-head'
+  - 'rbx-2 --2.0'
+  - 'jruby-head-20mode'
+  - 'jruby-head-21mode'

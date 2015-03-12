@@ -194,7 +194,7 @@ Tested under rubies, compatible with MRI 2.0+:
 
 * MRI rubies 2.0+
 * Rubinius 2+ (2.0+ mode)
-* JRuby 1.7+ (2.0+ mode)
+* JRuby head (2.0+ mode)
 
 Rubies with API 1.9 are not supported.
 
