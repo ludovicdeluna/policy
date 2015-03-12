@@ -176,8 +176,8 @@ Check policies by names (you can also use singular forms `follow_policy?` and `f
 
 ```ruby
 # Checks only consistency and skips all other policies
-transaction.follow_policy? :consistency
-transaction.follow_policy! :consistency
+transfer.follow_policy? :consistency
+transfer.follow_policy! :consistency
 ```
 
 The set of policies can be checked at once:
