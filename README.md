@@ -60,20 +60,17 @@ $ gem install policy
 Suppose an over-simplified model of bank account transactions and account-to-account transfers.
 
 ```ruby
-# The bank account with a withdrawal limit being set
-class Account < Struct.new(:limit); end
-
 # The account transaction (either enrollment or witdrawal)
-class Transaction < Struct.new(:account, :sum); end
+class Transaction < Struct.new(:sum); end
 
-# The account-to account transfer, connecting two separate transactions
+# The transfer, connecting two separate transactions
 # (maybe this isn't an optimal model, but helpful for the subject)
 class Transfer < Struct.new(:withdrawal, :enrollment); end
 ```
 
-What we need is to apply the simple policy:
+What we need is to apply the simple policy (invariant):
 
-**Withdrawal from one account should be equal to enrollment to another.**
+**The sum of withdrawal's and enrollment's sums should be 0.**
 
 Let's do it with Policy Objects! 
 
